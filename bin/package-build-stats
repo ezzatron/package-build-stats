@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+const { getPackageStats } = require('../build')
+
+main().catch(error => {
+  console.error(error)
+  process.exit(1)
+})
+
+async function main () {
+  const [,, moduleOrPath] = process.argv
+
+  if (!moduleOrPath) {
+    console.error('Usage: package-build-stats <module-or-path>')
+    process.exit(1)
+  }
+
+  console.log(await getPackageStats(moduleOrPath))
+}
